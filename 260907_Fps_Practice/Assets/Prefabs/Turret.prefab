@@ -75,7 +75,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 4.5
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5828676413031404061
 MonoBehaviour:
@@ -92,11 +92,12 @@ MonoBehaviour:
   _turret: {fileID: 5549569212619726172}
   _rotateSpeed: 30
   _muzzlePoint: {fileID: 2472233865808147060}
-  _cooldown: 3
+  _cooldown: 1
   _bulletPrefab: {fileID: 3176168566109091895, guid: 3fc25dff6e6c2ef44af3a1da9910d878, type: 3}
-  _bulletSpeed: 3
+  _bulletSpeed: 4
   _bulletDamage: 1
-  _bulletExistTime: 4.5
+  _bulletExistTime: 5
+  _hp: 400
 --- !u!1 &6923524015706485014
 GameObject:
   m_ObjectHideFlags: 0

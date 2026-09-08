@@ -6,7 +6,7 @@ public class Monster : MonoBehaviour, IDamageable
 {
     [SerializeField] private int hp;
     
-    public GameObject GameObject {get => gameObject;}
+    public GameObject Damageables {get => gameObject;}
     
     public void TakeDamage(int damage)
     {
@@ -22,6 +22,6 @@ public class Monster : MonoBehaviour, IDamageable
 
     public void DeathMessage()
     {
-        Debug.Log($"{GameObject.name}이 파괴되었습니다");
+        Debug.Log($"{gameObject.name}이 파괴되었습니다");
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TurretController : MonoBehaviour
+public class TurretController : MonoBehaviour, IDamageable
 {
     [SerializeField] private const string TAG_DETECTED = "Player";
     private Transform _playerTransform;
@@ -24,6 +24,11 @@ public class TurretController : MonoBehaviour
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private int  _bulletDamage;
     [SerializeField] private float _bulletExistTime;
+    [SerializeField] private int _hp;
+    public GameObject Damageables
+    {
+        get => gameObject;
+    }
     
 
     private void Awake() => CacheComponents();
@@ -137,5 +142,20 @@ public class TurretController : MonoBehaviour
                 Debug.Log("DetectPlayer: 플레이어 발견!!!! ");
             }
         }
+    }
+    
+    public void TakeDamage(int damage)
+    {
+        _hp -= damage;
+        if (_hp <= 0)
+        {
+            DeathMessage();
+            Destroy(gameObject);
+        }
+    }
+
+    public void DeathMessage()
+    {
+        Debug.Log($"{gameObject.name}이 파괴되었습니다.");
     }
 }

@@ -17,11 +17,26 @@ public class PlayerWeapon : MonoBehaviour
     }
 
     private bool _isPressedFire => Input.GetKey(_fireKey);
-
+    
+    // 한 탄알집에 30발, 다 쏘면 발사불가, R키로 30발 반환
+    [SerializeField] private KeyCode _reloadKey = KeyCode.R;
+    [SerializeField] private int _maxMagazine;
+    private int magazine;
+    private bool _enoughMagazine
+    {
+        get { return magazine > 0; }
+    }
+    
     private void Update()
     {
         FireCoolTime();
+        WeaponReload();
         CacheComponents();
+    }
+
+    private void Start()
+    {
+        magazine = _maxMagazine;
     }
 
     private void FireCoolTime()
@@ -36,7 +51,7 @@ public class PlayerWeapon : MonoBehaviour
             return;
         }
 
-        if (_isPressedFire && _isFireCoolDone)
+        if (_isPressedFire && _isFireCoolDone && _enoughMagazine)
         {
             IDamageable damageable = GetDamageable();
 
@@ -44,12 +59,27 @@ public class PlayerWeapon : MonoBehaviour
             {
                 return;
             }
-        
+
+            magazine--;
             damageable.TakeDamage(_damage);
-            Debug.Log($"Player: {damageable.GameObject.name} 에게 발사");
+            Debug.Log($"Player: {damageable.Damageables.name} 에게 발사");
+            Debug.Log($"남은 장탄수 : {magazine}");
             _fireSpeed = 0f;
         }
-        
+        else if (_isPressedFire && _isFireCoolDone && !_enoughMagazine)
+        {
+            Debug.Log("재장전을 하세연!");
+            return;
+        }
+    }
+
+    private void WeaponReload()
+    {
+        if (magazine < _maxMagazine && Input.GetKeyDown(_reloadKey))
+        {
+            magazine = _maxMagazine;
+            Debug.Log($"재장전 햇시유!");
+        }
     }
 
     private IDamageable GetDamageable()
