@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
 public class ItemBox : MonoBehaviour, IInteractable
 {
+    
     public GameObject GameObject
     {
         get => gameObject;
@@ -29,7 +31,6 @@ public class ItemBox : MonoBehaviour, IInteractable
         {
             return;
         }
-        
         PlayerController player =  (PlayerController)interactor;
         Destroy(gameObject);
     }
@@ -53,4 +54,5 @@ public class ItemBox : MonoBehaviour, IInteractable
     {
         _outline = gameObject.GetComponent<Outline>();
     }
+
 }

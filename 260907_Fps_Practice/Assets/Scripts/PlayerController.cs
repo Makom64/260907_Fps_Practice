@@ -5,19 +5,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IInteractor
 {
-    [SerializeField] private Transform _cameraPivot;
-    private PlayerMovement _playerMovement;
-    private Transform _cameraTransform;
+    [SerializeField] private Transform _cameraPivot; // 시점 카메라를 담는다
     [SerializeField] private PlayerWeapon _weapon;
     [SerializeField] private float _interactRange;
-    private IInteractable _interactable;
-    private bool _hasDetectInteractable => _interactable != null;
-    public GameObject GameObject
+    [SerializeField] private KeyCode _interactKey = KeyCode.E;
+    [SerializeField] private GameObject _grenadePrefab;
+    [SerializeField] private KeyCode _useGrenade = KeyCode.Alpha3;
+    
+    private PlayerMovement _playerMovement; // 플레이어 움직임을 참조
+    private Transform _cameraTransform; // 카메라 위치
+    private IInteractable _interactable; // 상호가능체을 참조
+    private bool _hasDetectInteractable => _interactable != null; // 상호가능체 인식 여부
+    public GameObject GameObject // 플레이어 프로퍼티
     {
         get => gameObject;
     }
 
-    [SerializeField] private KeyCode _interactKey = KeyCode.E;
+    
     private bool _isPressedInteractKey => Input.GetKeyDown(_interactKey);
     private bool _canInteract => _hasDetectInteractable && Input.GetKeyDown(_interactKey);
     
@@ -31,10 +35,22 @@ public class PlayerController : MonoBehaviour, IInteractor
     {
         _playerMovement.CameraRotate();
         _weapon.Fire();
+        UseGrenade();
         DetectInteractable();
         TryInteract();
     }
 
+    private void UseGrenade()
+    {
+        if (!Input.GetKeyDown(_useGrenade))
+        {
+            return;
+        }
+
+        GameObject _grenade = Instantiate(_grenadePrefab, _cameraPivot.transform.position, Quaternion.identity);
+        _grenade.transform.Translate(Vector3.forward * 1f);
+    }
+    
     private void LateUpdate()
     {
         SetCameraTransform();
@@ -106,4 +122,6 @@ public class PlayerController : MonoBehaviour, IInteractor
         _interactable.Interact(this);
         _interactable = null;
     }
+    
+    
 }

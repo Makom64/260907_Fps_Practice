@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
-    private Rigidbody _rigidbody;
     [SerializeField] private float _mouseSensitivity;
     [SerializeField] private Transform _cameraPivot;
     [SerializeField] private float _minPitch;
     [SerializeField] private float _maxPitch;
+    
+    private Rigidbody _rigidbody;
     private float _pitch;
 
     private void Awake() => CacheComponents();
