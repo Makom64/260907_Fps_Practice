@@ -27,6 +27,9 @@ public class PlayerWeapon : MonoBehaviour
         get { return magazine > 0; }
     }
     
+    [SerializeField] private FlameEffect _flameEffect;
+    [SerializeField] private FlameEffect _bulletEffectPrefab;
+    
     private void Update()
     {
         FireCoolTime();
@@ -39,6 +42,20 @@ public class PlayerWeapon : MonoBehaviour
         magazine = _maxMagazine;
     }
 
+    private void PlayBulletEffect(RaycastHit hit)
+    {
+            Transform effectTransform = Instantiate(_bulletEffectPrefab).transform;
+            effectTransform.position = hit.point;
+            effectTransform.forward = hit.normal;
+        
+    }
+
+    private void PlayFlameEffect()
+    {
+        _flameEffect.gameObject.SetActive(true);
+        _flameEffect.Play();
+    }
+
     private void FireCoolTime()
     {
         _fireSpeed += Time.deltaTime;
@@ -46,25 +63,22 @@ public class PlayerWeapon : MonoBehaviour
     
     public void Fire()
     {
-        if (!_isPressedFire)
-        {
-            return;
-        }
-
         if (_isPressedFire && _isFireCoolDone && _enoughMagazine)
         {
+            PlayFlameEffect();
+            magazine--;
+            _fireSpeed = 0f;
+            Debug.Log($"남은 장탄수 : {magazine}");
+            
             IDamageable damageable = GetDamageable();
-
+            
             if (damageable == null)
             {
                 return;
             }
-
-            magazine--;
+            
             damageable.TakeDamage(_damage);
             Debug.Log($"Player: {damageable.Damageables.name} 에게 발사");
-            Debug.Log($"남은 장탄수 : {magazine}");
-            _fireSpeed = 0f;
         }
         else if (_isPressedFire && _isFireCoolDone && !_enoughMagazine)
         {
@@ -90,6 +104,7 @@ public class PlayerWeapon : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, _weaponRange))
         {
+            PlayBulletEffect(hit);
             damageable = hit.collider.GetComponent<IDamageable>();
         }
 
