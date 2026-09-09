@@ -12,10 +12,10 @@ public class Turret : MonoBehaviour, IDamageable
     [SerializeField] private SphereCollider _turretTrigger; // 자식의 트리거를 담음
     [field : SerializeField] public LayerMask _targetLayer { get; private set; }
     // 프로퍼티로 열어서 밖에서 읽을 수 있고 값은 인스펙터에서만 넣을 수 있음
-
+    
+    private GiveStatus _turretInfo; // 스탯을 받아올 변수
     public GameObject Damageables { get; }
-    private GiveStatus _turretInfo;
-
+    
     // 씬뷰에서 터렛을 좀 더 편하게 관리하려고 찾은 함수
     private void OnValidate() // 인스펙터를 갱신해준다
     {
@@ -32,11 +32,7 @@ public class Turret : MonoBehaviour, IDamageable
     
     private void Start()
     {
-        Debug.Log(_turretInfo._name);
-        Debug.Log(_turretInfo._hp);
-        Debug.Log(_turretInfo._damage);
-        Debug.Log(_turretInfo._moveSpeed);
-        Debug.Log(_turretInfo._fireSpeed);
+        
     }
     
     private void Update()
@@ -55,8 +51,14 @@ public class Turret : MonoBehaviour, IDamageable
     {turretHead.transform.Rotate(Vector3.up, _headRotateSpeed * Time.deltaTime);}
     
     // 데미지처리 구현
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        
+        int turretHP = _turretInfo._hp; // 값을 변경할 수 없어서 다른 변수에 담아줌
+        turretHP -= damage;
+
+        if (turretHP <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

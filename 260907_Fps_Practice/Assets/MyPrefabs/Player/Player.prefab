@@ -455,9 +455,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8025038205766188052}
-  - component: {fileID: 7101174076997844433}
   - component: {fileID: 8899349751336493968}
   - component: {fileID: 1494009399448152607}
+  - component: {fileID: 2139781025238506526}
+  - component: {fileID: 5742357774575871562}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -482,18 +483,6 @@ Transform:
   - {fileID: 1986246266838013489}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7101174076997844433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6681481895176689471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be953c176ff7fe74fafb97205d5d142a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &8899349751336493968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -542,6 +531,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &2139781025238506526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6681481895176689471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be953c176ff7fe74fafb97205d5d142a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerEnemy:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &5742357774575871562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6681481895176689471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09b990c5aced444ca2105202e9183f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <_name>k__BackingField: Player
+  <_hp>k__BackingField: 200
+  <_damage>k__BackingField: 10
+  <_moveSpeed>k__BackingField: 5
+  <_fireSpeed>k__BackingField: 1
 --- !u!1 &7452107677521615985
 GameObject:
   m_ObjectHideFlags: 0

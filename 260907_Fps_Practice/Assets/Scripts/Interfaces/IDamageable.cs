@@ -6,5 +6,5 @@ public interface IDamageable
 {
     public GameObject Damageables { get; }
     
-    public void TakeDamage();
+    public void TakeDamage(int damage);
 }
