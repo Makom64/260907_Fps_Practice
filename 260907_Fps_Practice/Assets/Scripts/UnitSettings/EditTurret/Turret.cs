@@ -25,6 +25,11 @@ public class Turret : MonoBehaviour, IDamageable
         }
     }
 
+    private void Awake()
+    {
+        CacheComponents();
+    }
+    
     private void Start()
     {
         Debug.Log(_turretInfo._name);
@@ -36,13 +41,12 @@ public class Turret : MonoBehaviour, IDamageable
     
     private void Update()
     {
-        CacheComponents();
         RotateHead();
     }
 
     private void CacheComponents()
     {
-        _turretInfo = transform.GetComponent<GiveStatus>();
+        _turretInfo = gameObject.GetComponent<GiveStatus>();
         // 자기 자신의 컴포넌트 값을 가져옴
     }
     

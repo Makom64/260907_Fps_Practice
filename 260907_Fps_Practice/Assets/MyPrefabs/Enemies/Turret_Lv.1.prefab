@@ -67,11 +67,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09b990c5aced444ca2105202e9183f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: "[Lv.1] \uD3EC\uD0D1"
-  _hp: 200
-  _damage: 20
-  _moveSpeed: 0
-  _fireSpeed: 0.5
+  <_name>k__BackingField: "Lv.1 \uD3EC\uD0D1"
+  <_hp>k__BackingField: 200
+  <_damage>k__BackingField: 15
+  <_moveSpeed>k__BackingField: 0
+  <_fireSpeed>k__BackingField: 0.5
 --- !u!1 &6923524015706485014
 GameObject:
   m_ObjectHideFlags: 0
