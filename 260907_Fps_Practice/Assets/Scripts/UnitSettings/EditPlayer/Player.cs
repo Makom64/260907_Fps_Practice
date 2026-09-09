@@ -5,10 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour, IAttackable
 {
     [SerializeField] private LayerMask _playerEnemy;
+    
     [SerializeField] private KeyCode _attackKey =  KeyCode.A;
     
     private GiveStatus _playerInfo;
     private IDamageable damageables;
+    
     public GameObject Attackable { get; }
     
 
@@ -21,11 +23,14 @@ public class Player : MonoBehaviour, IAttackable
     {
         Attack();
     }
+
+    
     
     private void CacheComponents()
     {
         _playerInfo = gameObject.GetComponent<GiveStatus>();
     }
+
 
     private void Attack()
     {

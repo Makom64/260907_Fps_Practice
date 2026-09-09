@@ -244,7 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6cdfe911368f2d468e8aec666a61ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outline: {fileID: 0}
 --- !u!65 &447259463
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -760,6 +759,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 407428604766454946, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.271
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444890726340615678, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
+      propertyPath: _maxPitch
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1444890726340615678, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
+      propertyPath: _minPitch
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 1494009399448152607, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -1004,7 +1015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6cdfe911368f2d468e8aec666a61ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outline: {fileID: 0}
 --- !u!65 &2111072185
 BoxCollider:
   m_ObjectHideFlags: 0
