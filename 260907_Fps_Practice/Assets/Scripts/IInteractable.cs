@@ -7,7 +7,6 @@ public interface IInteractable
     public GameObject GameObject { get; }
 
     public void Interact(IInteractor owner);
-
     public void Targeting();
     public void Untargeting();
 }
