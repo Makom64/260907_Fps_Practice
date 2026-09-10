@@ -2,18 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IAttackable
+public class Player : MonoBehaviour
 {
-    [SerializeField] private LayerMask _playerEnemy;
-    
-    [SerializeField] private KeyCode _attackKey =  KeyCode.A;
-    
-    private GiveStatus _playerInfo;
-    private IDamageable damageables;
-    
-    public GameObject Attackable { get; }
-    
+    [field : SerializeField] public LayerMask _PlayerEnemyMask { get; private set; } // Enemy로 설정 7번
 
+    private GiveStatus _playerInfo;
+    
     private void Awake()
     {
         CacheComponents();
@@ -21,30 +15,20 @@ public class Player : MonoBehaviour, IAttackable
 
     private void Update()
     {
-        Attack();
+        
     }
-
-    
     
     private void CacheComponents()
     {
         _playerInfo = gameObject.GetComponent<GiveStatus>();
     }
-
-
-    private void Attack()
-    {
-        if (!Input.GetKeyDown(_attackKey))
-        {
-            return;
-        }
-        AttackTarget(_playerInfo._damage);
-    }
     
+    
+    
+    /*
     // 공격하는 메서드
     public void AttackTarget(int damage)
     {
-        
         // 레이를 주인 위치에서 앞으로 쏨
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
@@ -57,4 +41,6 @@ public class Player : MonoBehaviour, IAttackable
             Debug.Log("공격성공");
         }
     }
+    */
+    
 }

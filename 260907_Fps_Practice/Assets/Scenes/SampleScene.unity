@@ -775,6 +775,14 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4715375410373542627, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5742357774575871562, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
+      propertyPath: <_moveSpeed>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6681481895176689471, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
       propertyPath: m_Name
       value: Player
