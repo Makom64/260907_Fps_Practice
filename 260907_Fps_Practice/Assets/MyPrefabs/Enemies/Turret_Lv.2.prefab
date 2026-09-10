@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2720680445683402510}
   - component: {fileID: 4593236237107636313}
   - component: {fileID: 3699436758445070770}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Turret_Lv.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997fbe2783ffa3343aac1dd59a8a0e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretHead: {fileID: 6601864240032995033}
-  turretBody: {fileID: 5538303938103917607}
+  _turretHead: {fileID: 6601864240032995033}
+  _turretBody: {fileID: 5538303938103917607}
   _headRotateSpeed: 50
   _turretRange: 10
   _turretTrigger: {fileID: 1751418660485098401}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 5737681148236882570}
   - component: {fileID: 1751418660485098401}
   - component: {fileID: 5503630897582423319}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: TurretTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

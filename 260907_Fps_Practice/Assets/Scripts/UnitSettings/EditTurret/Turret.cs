@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour, IDamageable
 {
-    [SerializeField] private GameObject turretHead; // 터렛의 대가리 설정
-    [SerializeField] private GameObject turretBody; // 터렛의 몸통 설정
+    [SerializeField] private GameObject _turretHead; // 터렛의 대가리 설정
+    [SerializeField] private GameObject _turretBody; // 터렛의 몸통 설정
     [SerializeField] private float _headRotateSpeed; // 대가리 돌아가는 속도
     [SerializeField] private float _turretRange; // 터렛 범위 설정
     [SerializeField] private SphereCollider _turretTrigger; // 자식의 트리거를 담음
@@ -14,6 +14,7 @@ public class Turret : MonoBehaviour, IDamageable
     // 프로퍼티로 열어서 밖에서 읽을 수 있고 값은 인스펙터에서만 넣을 수 있음
     
     private GiveStatus _turretInfo; // 스탯을 받아올 변수
+    private int turretHp;
     public GameObject Damageables { get; }
     
     // 씬뷰에서 터렛을 좀 더 편하게 관리하려고 찾은 함수
@@ -42,23 +43,24 @@ public class Turret : MonoBehaviour, IDamageable
 
     private void CacheComponents()
     {
-        _turretInfo = gameObject.GetComponent<GiveStatus>();
-        // 자기 자신의 컴포넌트 값을 가져옴
+        _turretInfo = gameObject.GetComponent<GiveStatus>(); // 자기 자신의 컴포넌트 값을 가져옴
+        turretHp = _turretInfo._hp; // 값을 변경할 수 없어서 다른 변수에 담아줌
+        // _turretHead.GetComponentInParent<IDamageable>();
+        // _turretBody.GetComponentInParent<IDamageable>();
     }
     
     // 대가리 돌아가는 기능
     private void RotateHead()
-    {turretHead.transform.Rotate(Vector3.up, _headRotateSpeed * Time.deltaTime);}
+    {_turretHead.transform.Rotate(Vector3.up, _headRotateSpeed * Time.deltaTime);}
     
     // 데미지처리 구현
     public void TakeDamage(int damage)
     {
-        int turretHP = _turretInfo._hp; // 값을 변경할 수 없어서 다른 변수에 담아줌
-        turretHP -= damage;
-
-        if (turretHP <= 0)
+        turretHp -= damage;
+        Debug.Log(turretHp);
+        if (turretHp <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

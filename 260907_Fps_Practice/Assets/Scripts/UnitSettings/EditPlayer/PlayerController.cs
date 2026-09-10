@@ -10,20 +10,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _mouseSensitivity; // 마우스 민감도
     [SerializeField] private float _minPitch; // 카메라 아래로 최대 각도
     [SerializeField] private float _maxPitch; // 카메라 위로 최대 각도
-    
+
     private Transform _playerCamTransform; // 메인카메라를 담아줄 변수
     private GiveStatus _playerStatus; // 플레이어 스탯을 담아줄 변수
     private float _pitch; // 인스펙터에서 설정한 피치값을 담아줄 변수
-    
+
     // 공격 관련 ------------------------------------------------------
     [SerializeField] private KeyCode _useWeapon = KeyCode.Mouse0; // 좌클릭으로 공격
     [SerializeField] private KeyCode _reloadKey = KeyCode.R;
-
-    private PlayerWeapon _playerWeapon;
+    [field : SerializeField] public KeyCode _changeWeapon1 = KeyCode.Alpha1;// 무기 1로 변경
+    [field : SerializeField] public KeyCode _changeWeapon2 =  KeyCode.Alpha2; // 무기 2로 변경
+    
     private Player _player; // 플레이어를 담을 변수
-    private LayerMask _playerEnemy;
-    private bool _isWeaponKeyInput; // 공격키를 눌렀는지
+    private LayerMask _playerEnemy; // 플레이어의 레이어 마스크를 가져올 변수
+    private IDamageable _damageables; // 공격대상을 담을 변수
 
+    public PlayerWeapon _playerWeapon;
+    
     // 공격키를 눌렀는지를 반환해줄 메서드
     public void ReadWeaponKeyInput()
     {
@@ -38,8 +41,12 @@ public class PlayerController : MonoBehaviour
         
         if (Physics.Raycast(ray, out hit, _playerWeapon._range, _playerEnemy))
         {
+            // 맞은 애를 임시 변수에 담아주고, IDamageable 컴포넌트도 가져온다
+            _damageables = hit.transform.GetComponentInParent<IDamageable>();
+            _damageables.TakeDamage(_playerStatus._damage * _playerWeapon._damage);
             Debug.Log(hit.transform.name);
         }
+        
     }
     
     private Rigidbody _playerRB; // 여기다가 rigidbody를 달아줄거임
@@ -128,7 +135,7 @@ public class PlayerController : MonoBehaviour
         _playerStatus = transform.GetComponent<GiveStatus>();
         // 플레이어의 rigidbody를 가져옴
         _playerRB = transform.GetComponent<Rigidbody>();
-        _playerWeapon = transform.GetComponentInChildren<PlayerWeapon>();
+        _playerWeapon = transform.GetComponent<PlayerWeapon>();
         _player = transform.GetComponent<Player>();
     }
 }
