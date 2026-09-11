@@ -16,10 +16,11 @@ public class PlayerController : MonoBehaviour
     private float _pitch; // 인스펙터에서 설정한 피치값을 담아줄 변수
 
     // 공격 관련 ------------------------------------------------------
-    [SerializeField] private KeyCode _useWeapon = KeyCode.Mouse0; // 좌클릭으로 공격
-    [SerializeField] private KeyCode _reloadKey = KeyCode.R;
+    [field : SerializeField] public KeyCode _useWeapon = KeyCode.Mouse0; // 좌클릭으로 공격
+    [field : SerializeField] public KeyCode _reloadKey = KeyCode.R; // 재장전 키
     [field : SerializeField] public KeyCode _changeWeapon1 = KeyCode.Alpha1;// 무기 1로 변경
     [field : SerializeField] public KeyCode _changeWeapon2 =  KeyCode.Alpha2; // 무기 2로 변경
+    [field : SerializeField] public KeyCode _useThrowable = KeyCode.Alpha4; // 4번을 눌러서 수류탄 사용
     
     private Player _player; // 플레이어를 담을 변수
     private LayerMask _playerEnemy; // 플레이어의 레이어 마스크를 가져올 변수
@@ -58,9 +59,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.IsGameRunning)
+        {
+            return;
+        }
+        // 만약 게임중이 false면 플레이어 조종을 불가
+        
         MovePlayerCam();
         MovePlayerPosition();
         ReadWeaponKeyInput();
+        if (Input.GetKeyDown(KeyCode.P)) GameManager.Instance.Pause();
+        else if (Input.GetKeyDown(KeyCode.Alpha0)) GameManager.Instance.Run();
+
+        
     }
     
     private void LateUpdate()
@@ -138,4 +149,15 @@ public class PlayerController : MonoBehaviour
         _playerWeapon = transform.GetComponent<PlayerWeapon>();
         _player = transform.GetComponent<Player>();
     }
+
+    
+    
+    public void SetSingleTon()
+    {
+        GameManager.Instance.Pause();
+    }
+    
+    
+    // 강사님 교본 아니라서 잠깐 주석
+    
 }

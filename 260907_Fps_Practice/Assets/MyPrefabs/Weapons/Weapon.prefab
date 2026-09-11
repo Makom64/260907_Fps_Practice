@@ -49,6 +49,8 @@ MonoBehaviour:
   <_playerWeapons>k__BackingField:
   - {fileID: 4779446326946119765}
   - {fileID: 8858239676627544323}
+  - {fileID: 1955166493014072787, guid: 35824a9f711ab914c84bc5f2cc23dfaf, type: 3}
+  <GrenadePrefab>k__BackingField: {fileID: 0}
 --- !u!1001 &2650484631702203804
 PrefabInstance:
   m_ObjectHideFlags: 0

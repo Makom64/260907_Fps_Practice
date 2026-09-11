@@ -7,6 +7,7 @@ public class WeaponManager : MonoBehaviour
     [field : SerializeField] public PlayerWeapon[] _playerWeapons { get; private set; }
     
     private PlayerController _playerController; // 컨트롤러 컴포넌트 담을 변수
+    private ThrowableMovement _throwable; // 던져서 쓰는 무기들
     
     // 1번 무기를 가지고 있을 땐 1번 작동 안 함
     // 2번 무기를 가지고 있을 땐 2번 작동 안 함
@@ -22,6 +23,7 @@ public class WeaponManager : MonoBehaviour
         _hasWeapon1 = true;
         _playerWeapons[0].gameObject.SetActive(true);
         _playerWeapons[1].gameObject.SetActive(false);
+        _playerWeapons[2].gameObject.SetActive(false);
     }
 
     private void Update()
@@ -74,7 +76,6 @@ public class WeaponManager : MonoBehaviour
     private void CacheComponents()
     {
         _playerController = transform.parent.parent.GetComponent<PlayerController>();
-        // 
-        // 
+        _throwable = GetComponent<ThrowableMovement>();
     }
 }
