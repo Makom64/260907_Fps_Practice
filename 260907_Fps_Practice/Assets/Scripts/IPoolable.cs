@@ -7,7 +7,7 @@ public interface IPoolable
     public ObjectPool Pool { get; set; } // 자신이 속한 Pool에 대한 프로퍼티
     
     // 어차피 생성할 위치등을 설정할거라면 인터페이스에서 Transform을 제공해주기
-    public Transform tr { get; }
+    public Transform poolableTransform { get; }
     
     public void ReturnToPool();
 }

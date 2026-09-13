@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxPitch; // 카메라 위로 최대 각도
 
     private Transform _playerCamTransform; // 메인카메라를 담아줄 변수
-    private GiveStatus _playerStatus; // 플레이어 스탯을 담아줄 변수
+    private Status _playerStatus; // 플레이어 스탯을 담아줄 변수
     private float _pitch; // 인스펙터에서 설정한 피치값을 담아줄 변수
 
     // 공격 관련 ------------------------------------------------------
@@ -59,11 +59,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        
+        /*
         if (!GameManager.Instance.IsGameRunning)
         {
             return;
         }
         // 만약 게임중이 false면 플레이어 조종을 불가
+        */
         
         MovePlayerCam();
         MovePlayerPosition();
@@ -143,7 +146,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerCamTransform = Camera.main.transform; // 메인 카메라 위치를 갖는다
         // 이 스크립트가 붙은 플레이어의 스탯을 가져온다
-        _playerStatus = transform.GetComponent<GiveStatus>();
+        _playerStatus = transform.GetComponent<Status>();
         // 플레이어의 rigidbody를 가져옴
         _playerRB = transform.GetComponent<Rigidbody>();
         _playerWeapon = transform.GetComponent<PlayerWeapon>();

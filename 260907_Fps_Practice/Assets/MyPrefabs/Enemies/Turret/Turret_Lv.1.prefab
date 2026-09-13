@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8965152672673930243}
-  - component: {fileID: 8478194845368828663}
-  - component: {fileID: 1229393771250895755}
+  - component: {fileID: 5769311320422946484}
+  - component: {fileID: 4738844888442485109}
   m_Layer: 0
   m_Name: Turret_Lv.1
   m_TagString: Untagged
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 2110066463788314964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8478194845368828663
+--- !u!114 &5769311320422946484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,15 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997fbe2783ffa3343aac1dd59a8a0e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _turretHead: {fileID: 5066504944741566438}
-  _turretBody: {fileID: 728106401193407660}
-  _headRotateSpeed: 30
-  _turretRange: 5
-  _turretTrigger: {fileID: 2147606008421957118}
+  <_turretHead>k__BackingField: {fileID: 5066504944741566438}
+  <_turretBody>k__BackingField: {fileID: 728106401193407660}
+  <_headRotateSpeed>k__BackingField: 30
   <_targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &1229393771250895755
+  <_muzzlePoint>k__BackingField: {fileID: 2472233865808147060}
+--- !u!114 &4738844888442485109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,9 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09b990c5aced444ca2105202e9183f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <_name>k__BackingField: "Lv.1 \uD3EC\uD0D1"
+  <_name>k__BackingField: "\uD130\uB81B : 1\uB2E8\uACC4"
   <_hp>k__BackingField: 200
-  <_damage>k__BackingField: 15
+  <_damage>k__BackingField: 10
   <_moveSpeed>k__BackingField: 0
   <_fireSpeed>k__BackingField: 0.5
 --- !u!1 &6923524015706485014
@@ -81,7 +80,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2472233865808147060}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2110066463788314964}
   - component: {fileID: 2147606008421957118}
-  - component: {fileID: 3188934232361849862}
+  - component: {fileID: 2887494229383043864}
   m_Layer: 8
   m_Name: TurretTrigger
   m_TagString: Untagged
@@ -157,7 +156,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3188934232361849862
+--- !u!114 &2887494229383043864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,6 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ebd8b3c11d18c4a88956c47700de1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPlayerInRange: 0
 --- !u!1001 &5872941118744124895
 PrefabInstance:
   m_ObjectHideFlags: 0

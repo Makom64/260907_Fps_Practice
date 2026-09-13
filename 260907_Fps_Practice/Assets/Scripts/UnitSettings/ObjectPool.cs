@@ -2,19 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 오브젝트 풀의 기능
+// 1. 총알 같이 쓸 애들 미리 만들어놓고 필요할 때 마다 꺼내서 쓰고 돌려놓는 공간
+// 2. 터렛 총알, 플레이어 총알, 수류탄 등 조금씩 다르기 떄문에 오브젝트 풀 안에 종류별로 배열 만들기
+
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] private GameObject _prefab;
-    [field: SerializeField] public int Size { get; private set; } // 크기
-
-    private IPoolable[] _pool;
+    
+    [field: SerializeField] public int Size { get; private set; } // 오브젝트 풀 배열 크기
+    
+    private IPoolable[] _turretBulletPool; // 프리팹들로 채워질 배열
+    
+    
     public int Count { get; private set; }  // 실제로 들어가있는 거
     public bool IsEmpty => Count == 0; // 생성된게 0인지를 읽기 쉽게 할 수 도 있다
     
-    // 쓸만큼만 생성
-    public void Awake()
+    
+    private void Awake()
     {
         Init();
+    }
+    
+    // 
+    private void _turretBulletInit()
+    {
+        for (int i = 0; i < _pool.Length; i++)
+        {
+            GameObject go = Instantiate(_prefab);
+            _pool[i] = go.GetComponent<IPoolable>();
+            // _pool[i] = this;
+            go.SetActive(false);
+            
+        }
+        
+        Count = Size; // 마지막에 갯수 새주기
     }
 
     
@@ -49,20 +70,5 @@ public class ObjectPool : MonoBehaviour
         Count++;
     }
     
-    // 생성하는거 함수로 뺴기
-    private void Init()
-    {
-        _pool = new IPoolable[Size]; // 입력받은 사이즈로 배열 생성
-
-        for (int i = 0; i < _pool.Length; i++)
-        {
-            GameObject go = Instantiate(_prefab);
-            _pool[i] = go.GetComponent<IPoolable>();
-            _pool[i] = this;
-            go.SetActive(false);
-            
-        }
-        
-        Count = Size; // 마지막에 갯수 새주기
-    }
+    
 }

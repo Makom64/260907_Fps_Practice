@@ -658,8 +658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c09b990c5aced444ca2105202e9183f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <_name>k__BackingField: Player
-  <_hp>k__BackingField: 200
+  <_name>k__BackingField: "\uB9E4\uCF64\uC721\uD3EC\uACF0\uD0F1\uC774"
+  <_hp>k__BackingField: 300
   <_damage>k__BackingField: 1
   <_moveSpeed>k__BackingField: 5
   <_fireSpeed>k__BackingField: 1
@@ -681,6 +681,10 @@ MonoBehaviour:
   _maxPitch: 90
   _useWeapon: 323
   _reloadKey: 114
+  _changeWeapon1: 49
+  _changeWeapon2: 50
+  _useThrowable: 52
+  _playerWeapon: {fileID: 0}
 --- !u!65 &1521196630137859070
 BoxCollider:
   m_ObjectHideFlags: 0
