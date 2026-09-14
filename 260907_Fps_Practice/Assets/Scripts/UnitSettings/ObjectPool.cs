@@ -8,6 +8,7 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    [SerializeField] 
     
     [field: SerializeField] public int Size { get; private set; } // 오브젝트 풀 배열 크기
     
@@ -20,18 +21,18 @@ public class ObjectPool : MonoBehaviour
     
     private void Awake()
     {
-        Init();
+       // Init();
     }
     
     // 
     private void _turretBulletInit()
     {
-        for (int i = 0; i < _pool.Length; i++)
+        //for (int i = 0; i < _pool.Length; i++)
         {
-            GameObject go = Instantiate(_prefab);
-            _pool[i] = go.GetComponent<IPoolable>();
+            //GameObject go = Instantiate(_prefab);
+            //_pool[i] = go.GetComponent<IPoolable>();
             // _pool[i] = this;
-            go.SetActive(false);
+            //go.SetActive(false);
             
         }
         
@@ -39,6 +40,7 @@ public class ObjectPool : MonoBehaviour
     }
 
     
+    /*
     public IPoolable Take() // 생성해둔걸 받아가는 함수
     {
         // 그래서 반환형은 IPoolable
@@ -48,15 +50,16 @@ public class ObjectPool : MonoBehaviour
             return null;
         }
         
-        IPoolable poolable = _pool[Count - 1]; // 하나 꺼내면 갯수가 줄어드니까
+        //IPoolable poolable = _pool[Count - 1]; // 하나 꺼내면 갯수가 줄어드니까
         
         /* 이거랑 동일함
         Count--;
         IPoolable poolable = _pool[Count];
-        */
+        #1#
 
-        return poolable; // 받은걸 반환
+        //return poolable; // 받은걸 반환
     }
+    */
 
     public void Return(IPoolable poolable)
     {
@@ -65,8 +68,8 @@ public class ObjectPool : MonoBehaviour
             return;
         }
         
-        _pool[Count] = poolable; // 
-        poolable.tr.gameObject.SetActive(false); // 생성할 때 비활성화
+       // _pool[Count] = poolable; // 
+       // poolable.tr.gameObject.SetActive(false); // 생성할 때 비활성화
         Count++;
     }
     

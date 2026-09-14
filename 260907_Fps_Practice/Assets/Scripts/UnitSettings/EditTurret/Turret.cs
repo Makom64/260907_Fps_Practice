@@ -31,8 +31,12 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
     private TurretTrigger _turretTrigger; // 자식 컴포넌트를 받아줄 임시 변수
     private SphereCollider _triggerCollider;
     private float _turretCoolTime;
-    
-    public Player _player { get; set; }
+    private bool _canAttack
+    {
+        get { return _turretCoolTime >= _turretInfo._fireSpeed; }
+    }
+
+    public Player _player;
     // -----------------------------------------------------------------------------
 
     // 인터페이스 필드 구현 -----------------------------------------------------------------
@@ -48,6 +52,8 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
     private void Update()
     {
         RotateHead();
+        UpdateTurretCoolTime();
+        RayToPlayer();
     }
 
     private void CacheComponents()
@@ -55,6 +61,7 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
         // 자식인 트리거의 컴포넌트를 참조함
         _turretTrigger = transform.GetComponentInChildren<TurretTrigger>();
         _triggerCollider = transform.GetComponentInChildren<SphereCollider>();
+        _turretInfo = transform.GetComponent<Status>();
     }
     
     // 대가리 돌아가는 기능
@@ -77,39 +84,35 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
         }
     }
 
-    private bool RayToPlayer()
+    private void RayToPlayer()
     {
-        // 쏘는 방향은 총구 위치에서 플레이어 방향으로
-        Ray ray = new Ray(_muzzlePoint.position, new Vector3(
-            _player.transform.position.x,
-            _player.transform.position.y + _muzzlePoint.position.y,
-            _player.transform.position.z));
-        RaycastHit hit;
-
-        if (!Physics.Raycast(ray, out hit, _triggerCollider.radius, _targetLayer))
+        if (_turretTrigger._isPlayerInRange == true && _player.GetComponent<Player>())
         {
-            return false;
+            Ray ray = new Ray(_muzzlePoint.position, _muzzlePoint.transform.forward);
+            
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, _triggerCollider.radius, _targetLayer))
+            {
+                if (!_canAttack)
+                {
+                    return;
+                }
+                AttackTarget(_turretInfo._damage);
+                _turretCoolTime = 0f;
+            }
         }
-        return true;
     }
     
     public void AttackTarget(int damage)
     {
-        if (RayToPlayer())
-        {
-            _player.TakeDamage(damage);
-        }
+        _player.TakeDamage(damage);
+        Debug.Log($"{_player.name}에게 {damage}만큼 피해");
     }
 
-    private void TurretCoolTime()
+    private void UpdateTurretCoolTime()
     {
         _turretCoolTime +=  Time.deltaTime;
-
-        if (_turretCoolTime >= _turretInfo._fireSpeed)
-        {
-            AttackTarget(_turretInfo._damage);
-            _turretCoolTime = 0;
-        }
     }
     
     // 데미지처리 구현
@@ -126,3 +129,4 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
     }
 
 }
+

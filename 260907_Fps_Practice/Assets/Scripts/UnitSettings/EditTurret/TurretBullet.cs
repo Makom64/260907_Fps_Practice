@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class TurretBullet : MonoBehaviour, IPoolable
 {
-    private Rigidbody _bulletRB;
-    
-    public ObjectPool Pool { get; set; }
+    private Turret _turret;
+
+    public ObjectPool Pool { get; set; } // 이 총알이 돌아갈 오브젝트 풀
     public Transform poolableTransform { get; }
 
-    private void Awake()
+    private void Update()
     {
-        CacheComponents();
-    }
-
-    private void CacheComponents()
-    {
-        _bulletRB = GetComponent<Rigidbody>();
+        
     }
 
     public void ReturnToPool()

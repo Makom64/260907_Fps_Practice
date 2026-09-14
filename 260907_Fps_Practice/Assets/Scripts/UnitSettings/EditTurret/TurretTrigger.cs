@@ -11,7 +11,7 @@ public class TurretTrigger : MonoBehaviour
     // ----------------------------------------------------------
     private Turret _turret; // 부모 컴포넌트를 참조
     
-    public bool _isPlayerInRange; // 플레이어 감지했는지를 조건으로, 기본 false
+    public bool _isPlayerInRange { get; private set; } // 플레이어 감지했는지를 조건으로, 기본 false
     public float _range;
 
     private void Awake()
