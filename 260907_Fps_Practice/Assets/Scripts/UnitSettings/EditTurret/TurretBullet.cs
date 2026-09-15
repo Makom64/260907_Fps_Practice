@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TurretBullet : MonoBehaviour, IPoolable
 {
-    private Turret _turret;
-
     public ObjectPool Pool { get; set; } // 이 총알이 돌아갈 오브젝트 풀
     public Transform poolableTransform { get; }
 

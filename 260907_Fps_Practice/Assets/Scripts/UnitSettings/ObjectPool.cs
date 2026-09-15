@@ -8,7 +8,8 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] 
+    // 인스펙터에서 프리팹 참조
+    [SerializeField] private GameObject turretBulletPrefabs;
     
     [field: SerializeField] public int Size { get; private set; } // 오브젝트 풀 배열 크기
     
@@ -24,7 +25,7 @@ public class ObjectPool : MonoBehaviour
        // Init();
     }
     
-    // 
+    
     private void _turretBulletInit()
     {
         //for (int i = 0; i < _pool.Length; i++)
