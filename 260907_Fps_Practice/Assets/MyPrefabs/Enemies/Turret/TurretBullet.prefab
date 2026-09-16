@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 5872150348245376588}
   - component: {fileID: 486037645346046396}
   - component: {fileID: 7999363594540886300}
+  - component: {fileID: 5802445282865910150}
   - component: {fileID: 3660203382858012503}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TurretBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,6 +107,33 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5802445282865910150
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7213072586223379972}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!114 &3660203382858012503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,3 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30940dfbd2662b49903bf55b2538218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <damage>k__BackingField: 1
+  _timeLimit: 4
+  shootedturret: {fileID: 0}
+  turretStatus: {fileID: 0}

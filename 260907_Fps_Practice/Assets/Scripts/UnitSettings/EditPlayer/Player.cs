@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IAttackable, IDamageable
 {
-    [field : SerializeField] public LayerMask _PlayerEnemyMask { get; private set; } // Enemy로 설정 7번
+    // 플레이어가 적으로 간주하는 레이어 마스크
+    [field : SerializeField] public LayerMask _PlayerEnemyMask { get; private set; }
 
     private Status _playerInfo; // 플레이어의 스탯
     private int _playerHp;

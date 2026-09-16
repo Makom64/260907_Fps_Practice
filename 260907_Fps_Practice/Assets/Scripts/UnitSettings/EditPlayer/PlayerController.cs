@@ -39,13 +39,17 @@ public class PlayerController : MonoBehaviour
         Ray ray = new Ray(_playerCam.position, _playerCam.forward);
         RaycastHit hit;
         _playerEnemy = _player._PlayerEnemyMask;
-        
+
         if (Physics.Raycast(ray, out hit, _playerWeapon._range, _playerEnemy))
         {
             // 맞은 애를 임시 변수에 담아주고, IDamageable 컴포넌트도 가져온다
             _damageables = hit.transform.GetComponentInParent<IDamageable>();
-            _damageables.TakeDamage(_playerStatus._damage * _playerWeapon._damage);
-            Debug.Log(hit.transform.name);
+
+            if (_damageables != null)
+            {
+                _damageables.TakeDamage(_playerStatus._damage * _playerWeapon._damage);
+                Debug.Log(hit.transform.name);
+            }
         }
         
     }

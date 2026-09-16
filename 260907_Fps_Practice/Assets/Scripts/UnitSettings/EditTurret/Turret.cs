@@ -23,11 +23,14 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
     // 터렛이 탐지할 레이어 마스크
     [field : SerializeField] public LayerMask _targetLayer { get; private set; }
     // 터렛이 쏠 총알 오브젝트
-    [field : SerializeField] public GameObject _bullet { get; private set; }
+    [SerializeField] private TurretBullet _turretBullet;
+    // 오브젝트풀을 참조
+    [SerializeField] private GameObject _turretBulletPool;
     // -------------------------------------------------------------------------
     
     // 다른 컴포넌트를 가져올 변수들 --------------------------------------------------
     private Status _turretInfo; // 스탯을 받아올 변수
+    private int turretHp;
     private TurretTrigger _turretTrigger; // 자식 컴포넌트를 받아줄 임시 변수
     private SphereCollider _triggerCollider;
     private float _turretCoolTime;
@@ -62,6 +65,7 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
         _turretTrigger = transform.GetComponentInChildren<TurretTrigger>();
         _triggerCollider = transform.GetComponentInChildren<SphereCollider>();
         _turretInfo = transform.GetComponent<Status>();
+        turretHp = _turretInfo._hp;
     }
     
     // 대가리 돌아가는 기능
@@ -98,7 +102,15 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
                 {
                     return;
                 }
-                AttackTarget(_turretInfo._damage);
+
+                TurretBullet bullet = ObjectPool.Instance.TakeBullet();
+                bullet.shootedturret = this;
+                bullet.turretStatus = _turretInfo;
+                bullet._timeLimit = _triggerCollider.radius;
+                bullet.poolableTransform.position = _muzzlePoint.position;
+                bullet.poolableTransform.rotation = _muzzlePoint.rotation;
+                bullet.StartCoroutine(bullet.Returnroutine());
+                
                 _turretCoolTime = 0f;
             }
         }
@@ -118,15 +130,12 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
     // 데미지처리 구현
     public void TakeDamage(int damage)
     {
-        /*
         turretHp -= damage;
         Debug.Log(turretHp);
         if (turretHp <= 0)
         {
             Destroy(gameObject);
         }
-        */
     }
-
 }
 

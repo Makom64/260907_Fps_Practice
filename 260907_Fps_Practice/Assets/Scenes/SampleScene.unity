@@ -933,6 +933,10 @@ PrefabInstance:
       propertyPath: _minPitch
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1444890726340615678, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
+      propertyPath: _playerWeapon
+      value: 
+      objectReference: {fileID: 1764321161}
     - target: {fileID: 1494009399448152607, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
       propertyPath: m_UseGravity
       value: 0
@@ -994,6 +998,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
+--- !u!114 &1764321161 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5558449491696323959, guid: a770b1cffe4056e459fc71850d82c210, type: 3}
+  m_PrefabInstance: {fileID: 1336740150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1a2426a33947e46aaec26f67662aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1813547948 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8909579027285431764, guid: 76c7e3ab40588d44c84209040eee5b0d, type: 3}
@@ -1043,8 +1058,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a747b018e932845a3105e881256392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 0}
-  <Size>k__BackingField: 0
+  _turretBulletPrefabs: {fileID: 3660203382858012503, guid: b8976e0dde5e3c841a185047499bcc23, type: 3}
+  <Size>k__BackingField: 20
 --- !u!4 &1988095255
 Transform:
   m_ObjectHideFlags: 0

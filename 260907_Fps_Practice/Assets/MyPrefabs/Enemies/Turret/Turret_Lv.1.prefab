@@ -49,11 +49,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <_turretHead>k__BackingField: {fileID: 5066504944741566438}
   <_turretBody>k__BackingField: {fileID: 728106401193407660}
+  <_muzzlePoint>k__BackingField: {fileID: 2472233865808147060}
   <_headRotateSpeed>k__BackingField: 30
   <_targetLayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  <_muzzlePoint>k__BackingField: {fileID: 2472233865808147060}
+  _turretBullet: {fileID: 3660203382858012503, guid: b8976e0dde5e3c841a185047499bcc23, type: 3}
+  _player: {fileID: 0}
 --- !u!114 &4738844888442485109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ebd8b3c11d18c4a88956c47700de1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isPlayerInRange: 0
+  _range: 0
 --- !u!1001 &5872941118744124895
 PrefabInstance:
   m_ObjectHideFlags: 0

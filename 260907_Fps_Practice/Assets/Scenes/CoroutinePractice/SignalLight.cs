@@ -60,11 +60,12 @@ public class SignalLight : MonoBehaviour
         while (true)
         {
             _CubeRenderer.material.color = Color.red;
-            yield return new WaitUntil(() => _isCrossRequested);
+            yield return _waitOneSeconds;
             _CubeRenderer.material.color = Color.yellow;
             yield return new WaitUntil(() => _isCrossRequested);
+            _isCrossRequested = false;
             _CubeRenderer.material.color = Color.green;
-            yield return new WaitUntil(() => _isCrossRequested);
+            yield return _waitOneSeconds;
         }
     }
 

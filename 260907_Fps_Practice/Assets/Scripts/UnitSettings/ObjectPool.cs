@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // 오브젝트 풀의 기능
@@ -8,25 +9,30 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    // 터렛총알 프리팹 참조
+    // 인스펙터를 통해 총알 프리팹을 참조
     [SerializeField] private TurretBullet _turretBulletPrefabs;
+    // 인스펙터를 통해 총알프리팹 배열 크기를 정함
+    [field: SerializeField] public int Size { get; private set; }
+    // 터렛총알 배열
+    private TurretBullet[] _turretBullets;
     
-    [field: SerializeField] public int Size { get; private set; } // 오브젝트 풀 배열 크기
-    
-    private IPoolable[] _turretBullets; // 프리팹들로 채워질 배열
-    
+    // public ObjectPool Instance { get; private set; }
     public int Count { get; private set; }  // 실제로 들어가있는 거
     public bool IsEmpty => Count == 0; // 생성된게 0인지를 읽기 쉽게 할 수 도 있다
-    
-    
+    public bool CanReturn => Size > Count; // 갯수가 배열크기만큼이면 더 못 넣으니까
+    public static ObjectPool Instance { get; private set; }
+
     private void Awake()
     {
-       TurretBulletInit();
+        TurretBulletInit();
+        SetSingleTon();
     }
     
     // 터렛 총알 배열 채우기
     private void TurretBulletInit()
     {
+        _turretBullets = new TurretBullet[Size];
+        
         // 인스펙터에서 설정한 값만큼 배열의 크기가 정해진다
         for (int i = 0; i < Size; i++)
         {
@@ -36,14 +42,19 @@ public class ObjectPool : MonoBehaviour
 
             // TurretBullet 컴포넌트는 IPoolable을 상속받고 있기 떄문에 캐스팅 가능
             _turretBullets[i] = turretbullet;
+
+            // Bullet이 돌아갈 풀을 자신으로 걸어줌
+            turretbullet.Pool = this;
         }
         
         // 현재 들어가있는 갯수를 새어줄 Count에도 Size를 대입해준다
         Count = Size;
         Debug.Log($"현재 터렛총알이 {Count}개 생성되어있는 상태입니다.");
+        
+        Debug.Log(_turretBullets[1].poolableTransform.name);
     }
-    
-    public IPoolable TakeBullet() // 배열에서 가져가는 함수이기에 반환형은 인터페이스명으로
+
+    public TurretBullet TakeBullet() // 배열에서 가져가는 함수이기에 반환형은 인터페이스명으로
     {
         if (IsEmpty) // 풀에 아무것도 없으면 못 받으니까 조건을 넣어야됨
         {
@@ -51,23 +62,32 @@ public class ObjectPool : MonoBehaviour
         }
 
         // 배열 사이즈 - 1을 가져오고 Count도 하나 뺴주어야한다
-        IPoolable bullet = _turretBullets[Count - 1];
+        
+        TurretBullet bullet = _turretBullets[Count - 1];
+        bullet.poolableTransform.gameObject.SetActive(true);
         Count--;
 
         return bullet;
     }
 
-    public void Return(IPoolable poolable)
+    public void TurretBulletReturn(TurretBullet poolable)
     {
-        if (Size <= Count) // 꽉찼을때에는 아무것도 하지 않도록
+        if (!CanReturn)
         {
             return;
         }
-        
-       // _pool[Count] = poolable; // 
-       // poolable.tr.gameObject.SetActive(false); // 생성할 때 비활성화
+        _turretBullets[Count] =  poolable;
         Count++;
     }
-    
-    
+
+    private void SetSingleTon()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 }
