@@ -104,6 +104,7 @@ public class Turret : MonoBehaviour, IDamageable, IAttackable
                 }
 
                 TurretBullet bullet = ObjectPool.Instance.TakeBullet();
+                //bullet.speed
                 bullet.shootedturret = this;
                 bullet.turretStatus = _turretInfo;
                 bullet._timeLimit = _triggerCollider.radius;

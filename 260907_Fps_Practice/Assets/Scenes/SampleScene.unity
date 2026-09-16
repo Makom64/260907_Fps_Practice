@@ -174,6 +174,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2147606008421957118, guid: 1eace1ae7e7fd624f8ea7d1059ecbc2f, type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5769311320422946484, guid: 1eace1ae7e7fd624f8ea7d1059ecbc2f, type: 3}
       propertyPath: <_turretRange>k__BackingField
       value: 9.7
